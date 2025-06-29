@@ -1,0 +1,21 @@
+# Etapa de build
+FROM mcr.microsoft.com / dotnet / sdk:6.0 AS build
+WORKDIR /app
+
+# Copia os arquivos e restaura dependências
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copia tudo e compila
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Etapa de runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR / app
+COPY--from = build / app /out ./
+
+# Exponha a porta HTTP padrão
+EXPOSE 80
+
+ENTRYPOINT["dotnet", "ServidoresESP32.dll"]
