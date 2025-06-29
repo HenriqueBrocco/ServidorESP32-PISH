@@ -1,0 +1,46 @@
+﻿@model List<ServidorESP32.Controllers.Dado>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Visualização de Dados</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Dados Recebidos do ESP32</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Oxigenação</th>
+                <th>Frequencia cardiaca</th>
+                <th>Queda</th>
+                <th>Coordenadas - Altitude</th>
+                <th>Data e Hora</th>
+                <th>Maps</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dado in Model.OrderByDescending(d => d.DataHora))
+            {
+                <tr>
+                    <td>@dado.Id</td>
+                    <td>@dado.Oxigenacao</td>
+                    <td>@dado.Bpm</td>
+                    <td>@dado.Queda</td>
+                    <td>@dado.Coordenadas</td>
+                    <td>@dado.DataHora</td>
+                    <td>
+                        <a href="@string.Format("https://www.google.com/maps?q={0}", dado.CoordenadasMaps)" target="_blank">Ver no Mapa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

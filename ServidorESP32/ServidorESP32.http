@@ -1,0 +1,6 @@
+@ServidorESP32_HostAddress = http://localhost:5218
+
+GET {{ServidorESP32_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
