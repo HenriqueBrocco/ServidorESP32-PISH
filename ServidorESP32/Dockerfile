@@ -17,4 +17,4 @@ COPY --from=build /app/out ./
 
 EXPOSE 80
 
-ENTRYPOINT["dotnet", "ServidoresESP32.dll"]
+ENTRYPOINT["dotnet", "ServidorESP32.dll"]
